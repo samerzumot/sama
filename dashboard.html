@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama – Dashboard</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .dashboard-wrapper {
+            min-height: 100vh;
+            position: relative;
+            padding-top: 100px;
+        }
+
+        .dashboard-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .dashboard-title h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-title p {
+            font-size: 1.15rem;
+            opacity: 0.55;
+            line-height: 1.6;
+        }
+
+        .balance-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(66, 133, 244, 0.08);
+            border: 1px solid rgba(66, 133, 244, 0.15);
+            border-radius: 9999px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4285F4;
+        }
+
+        .tutor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .tutor-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 36px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .tutor-card.admissions {
+            border: 1px solid rgba(66, 133, 244, 0.2);
+        }
+
+        .tutor-card.sat {
+            border: 1px solid rgba(161, 66, 244, 0.2);
+        }
+
+        .tutor-card.ib {
+            border: 1px solid rgba(13, 148, 136, 0.2);
+        }
+
+        .tutor-card.admissions:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(66, 133, 244, 0.2);
+        }
+
+        .tutor-card.sat:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(161, 66, 244, 0.2);
+        }
+
+        .tutor-card.ib:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(13, 148, 136, 0.2);
+        }
+
+        .tutor-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .tutor-card.admissions .tutor-avatar {
+            border: 3px solid rgba(66, 133, 244, 0.3);
+        }
+
+        .tutor-card.sat .tutor-avatar {
+            border: 3px solid rgba(161, 66, 244, 0.3);
+        }
+
+        .tutor-card.ib .tutor-avatar {
+            border: 3px solid rgba(13, 148, 136, 0.3);
+        }
+
+        .tutor-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .tutor-title {
+            font-size: 0.9rem;
+            opacity: 0.55;
+            font-weight: 500;
+            margin-bottom: 28px;
+        }
+
+        .tutor-cta {
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 9999px;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-family: inherit;
+        }
+
+        .tutor-cta:hover {
+            transform: scale(1.03);
+        }
+
+        .tutor-cta.admissions {
+            background: #4285F4;
+        }
+
+        .tutor-cta.sat {
+            background: #A142F4;
+        }
+
+        .tutor-cta.ib {
+            background: #0D9488;
+        }
+    </style>
+</head>
+
+<body class="light-theme">
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky-header">
+        <a href="/" class="logo" style="text-decoration:none; color:inherit;">sama</a>
+        <div style="display:flex; align-items:center; gap:16px;">
+            <div class="balance-pill">⏱ 5 min free</div>
+            <a href="contact.html" class="cta-button small">Contact Us</a>
+        </div>
+    </header>
+
+    <div class="dashboard-wrapper">
+        <div class="dashboard-content">
+            <div class="dashboard-title">
+                <h1>Who do you want to learn with?</h1>
+                <p>Select a tutor to start a live video session.</p>
+            </div>
+
+            <div class="tutor-grid">
+                <!-- Admissions -->
+                <div class="tutor-card admissions" onclick="startSession('admissions')">
+                    <div>
+                        <img src="tutor-admissions.png" alt="Eleanor" class="tutor-avatar">
+                        <div class="tutor-name">Eleanor</div>
+                        <div class="tutor-title">College Admissions Expert</div>
+                    </div>
+                    <button class="tutor-cta admissions">Start</button>
+                </div>
+
+                <!-- SAT -->
+                <div class="tutor-card sat" onclick="startSession('sat')">
+                    <div>
+                        <img src="tutor-sat.png" alt="Marcus" class="tutor-avatar">
+                        <div class="tutor-name">Marcus</div>
+                        <div class="tutor-title">SAT Prep Expert</div>
+                    </div>
+                    <button class="tutor-cta sat">Start</button>
+                </div>
+
+                <!-- IB -->
+                <div class="tutor-card ib" onclick="startSession('ib')">
+                    <div>
+                        <img src="tutor-ib.png" alt="Dr. Chen" class="tutor-avatar">
+                        <div class="tutor-name">Dr. Chen</div>
+                        <div class="tutor-title">IB Curriculum Expert</div>
+                    </div>
+                    <button class="tutor-cta ib">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="dark-footer" style="position:relative; z-index:1;">
+        <p>&copy; 2026 Sama AI Technology</p>
+    </footer>
+
+    <script>
+        // Canvas particles (light mode only)
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            let mouse = { x: -1000, y: -1000 };
+            window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2 + 1;
+                    this.baseAlpha = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (150 - dist) / 150;
+                        this.vx -= Math.cos(angle) * force * 0.1;
+                        this.vy -= Math.sin(angle) * force * 0.1;
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(66, 133, 244, ${this.baseAlpha * 1.2})`;
+                    ctx.fill();
+                }
+            }
+            function resize() {
+                width = window.innerWidth; height = window.innerHeight;
+                canvas.width = width; canvas.height = height;
+                particles = [];
+                for (let i = 0; i < Math.floor((width * height) / 15000); i++) particles.push(new Particle());
+            }
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            window.addEventListener('resize', resize);
+            resize(); animate();
+        })();
+
+        function startSession(tutorId) {
+            window.location.href = 'signup.html';
+        }
+    </script>
+</body>
+
+</html>

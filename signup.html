@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama – Request Access</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .signup-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .signup-card {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 440px;
+            width: 100%;
+            margin: 0 24px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        .signup-card h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .signup-card .subtitle {
+            font-size: 1rem;
+            opacity: 0.55;
+            text-align: center;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            opacity: 0.7;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #FAFAFA;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #4285F4;
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.12);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 0;
+            border-radius: 9999px;
+            border: none;
+            background: var(--text-charcoal);
+            color: var(--text-white);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.03);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #4285F4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .success-message .checkmark {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .success-message h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body class="light-theme">
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky-header">
+        <a href="/" class="logo" style="text-decoration:none; color:inherit;">sama</a>
+        <a href="dashboard.html" class="cta-button small">Back to Tutors</a>
+    </header>
+
+    <div class="signup-wrapper">
+        <div class="signup-card">
+            <div id="form-view">
+                <h1>Request Access</h1>
+                <p class="subtitle">Sign up to get 5 free minutes with an expert AI tutor.</p>
+
+                <form id="signup-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Request Access</button>
+                </form>
+
+                <a href="dashboard.html" class="back-link">← Back to tutors</a>
+            </div>
+
+            <div id="success-view" class="success-message">
+                <div class="checkmark">✅</div>
+                <h2>You're on the list!</h2>
+                <p>We'll reach out shortly with your access details. Keep an eye on your inbox.</p>
+                <a href="/" class="back-link" style="margin-top: 24px;">← Back to home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas particles (light mode only, no scroll switching)
+        (function () {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            let mouse = { x: -1000, y: -1000 };
+            window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2 + 1;
+                    this.baseAlpha = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (150 - dist) / 150;
+                        this.vx -= Math.cos(angle) * force * 0.1;
+                        this.vy -= Math.sin(angle) * force * 0.1;
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(66, 133, 244, ${this.baseAlpha * 1.2})`;
+                    ctx.fill();
+                }
+            }
+            function resize() {
+                width = window.innerWidth; height = window.innerHeight;
+                canvas.width = width; canvas.height = height;
+                particles = [];
+                for (let i = 0; i < Math.floor((width * height) / 15000); i++) particles.push(new Particle());
+            }
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            window.addEventListener('resize', resize);
+            resize(); animate();
+        })();
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('form-view').style.display = 'none';
+            document.getElementById('success-view').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

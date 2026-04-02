@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Sama</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Specific overrides for contact page if needed, otherwise reuses style.css */
+        body {
+            background-color: var(--bg-dark);
+            /* Always dark for contact/form focus */
+            color: var(--text-white);
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 150px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .submit-btn {
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky-header">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">sama</a></div>
+        <a href="index.html" class="cta-button small" style="background: rgba(255,255,255,0.1);">Back to Home</a>
+    </header>
+
+    <main>
+        <section class="contact-container fade-in visible">
+            <h1 style="text-align: center; margin-bottom: 10px;">Get in Touch</h1>
+            <p style="text-align: center; margin-bottom: 40px; opacity: 0.7;">Have questions about Sama? Let us know.
+            </p>
+
+            <form action="https://formsubmit.co/cooksy.ai@gmail.com" method="POST">
+                <!-- Honey Pot -->
+                <input type="text" name="_honey" style="display:none">
+                <!-- Disable Captcha -->
+                <input type="hidden" name="_captcha" value="false">
+                <!-- Redirect -->
+                <input type="hidden" name="_next" value="https://sama-web.vercel.app/thankyou.html">
+                <!-- Subject -->
+                <input type="hidden" name="_subject" value="New Contact Inquiry (Sama)">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">How can we help?</label>
+                    <textarea id="message" name="message" rows="5" placeholder="I'm interested in..."
+                        required></textarea>
+                </div>
+                <button type="submit" class="cta-button primary submit-btn">Send Inquiry</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script> <!-- Reusing script for particles -->
+</body>
+
+</html>

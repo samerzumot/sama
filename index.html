@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Google Sans Flex via Inter as proxy, or actually importing similar font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky-header">
+        <div class="logo">sama</div>
+        <a href="contact.html" class="cta-button small">Contact Us</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-headline">
+                    Your Future <br>
+                    <span class="highlight">Secured.</span>
+                </h1>
+                <p class="hero-sub">
+                    Personal <span id="rotating-word"
+                        style="display:inline-block; font-weight:700; transition: opacity 0.35s ease, transform 0.35s ease;">counselling</span>,
+                    reimagined.
+                </p>
+                <div class="hero-actions">
+                    <a href="#demo" class="cta-button primary">Meet Sama</a>
+                    <a href="dashboard.html" class="cta-button secondary">Try Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer for scroll transition -->
+        <div class="scroll-spacer"></div>
+
+        <section id="demo" class="video-demo-section dark-section">
+            <h2 class="section-title fade-in" style="margin-bottom: 40px; font-size: 2rem;">This is Sama</h2>
+            <div class="video-container fade-in" style="display: flex; justify-content: center;">
+                <video controls autoplay playsinline
+                    style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+                    <source src="Sama-web2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Sections removed as requested -->
+    </main>
+
+    <footer class="dark-footer">
+        <p>&copy; 2026 Sama AI Technology</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
