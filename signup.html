@@ -165,10 +165,9 @@
             </div>
 
             <div id="success-view" class="success-message">
-                <div class="checkmark">✅</div>
-                <h2>You're on the list!</h2>
-                <p>We'll reach out shortly with your access details. Keep an eye on your inbox.</p>
-                <a href="/" class="back-link" style="margin-top: 24px;">← Back to home</a>
+                <div class="checkmark">🚀</div>
+                <h2>Success!</h2>
+                <p>Redirecting you to the dashboard...</p>
             </div>
         </div>
     </div>
@@ -229,6 +228,14 @@
             e.preventDefault();
             document.getElementById('form-view').style.display = 'none';
             document.getElementById('success-view').style.display = 'block';
+            
+            // Optional: Store user name for персонализация
+            const name = document.getElementById('name').value;
+            localStorage.setItem('sama_user_name', name);
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html?signup=success';
+            }, 1200);
         }
     </script>
 </body>

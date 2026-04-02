@@ -301,6 +301,14 @@
         function updateBalanceUI() {
             const balance = localStorage.getItem('sama_minutes') || '5';
             document.getElementById('user-balance').textContent = `⏱ ${balance} min`;
+            
+            // Check for signup success
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('signup') === 'success') {
+                const name = localStorage.getItem('sama_user_name') || 'there';
+                const title = document.querySelector('.dashboard-title h1');
+                if (title) title.innerHTML = `Welcome, ${name}! <br>Who do you want to learn with?`;
+            }
         }
 
         updateBalanceUI();
