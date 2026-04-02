@@ -166,6 +166,95 @@
         .tutor-cta.ib {
             background: #0D9488;
         }
+
+        /* Coming Soon State */
+        .tutor-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .tutor-card.disabled::after {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .tutor-cta.disabled {
+            background: #ccc !important;
+            color: #666 !important;
+        }
+
+        /* Iframe Overlay */
+        .session-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .session-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .session-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .session-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2100;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+
+        .session-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Native Pricing Section */
+        .pricing-section {
+            padding: 100px 24px;
+            background: rgba(66, 133, 244, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            margin-top: 80px;
+        }
+
+        .pricing-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
@@ -176,7 +265,6 @@
         <a href="/" class="logo" style="text-decoration:none; color:inherit;">sama</a>
         <div style="display:flex; align-items:center; gap:12px;">
             <div class="balance-pill" id="user-balance">⏱ Loading...</div>
-            <button class="cta-button small secondary" onclick="openPricingModal()" style="padding: 10px 18px; background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); color: var(--text-charcoal); margin-left: 0;">Refill</button>
             <a href="contact.html" class="cta-button small">Contact Us</a>
         </div>
     </header>
@@ -200,26 +288,110 @@
                 </div>
 
                 <!-- SAT -->
-                <div class="tutor-card sat" onclick="startSession('sat')">
+                <div class="tutor-card sat disabled">
                     <div>
                         <img src="tutor-sat.png" alt="Marcus" class="tutor-avatar">
                         <div class="tutor-name">Marcus</div>
                         <div class="tutor-title">SAT Prep Expert</div>
                     </div>
-                    <button class="tutor-cta sat">Start</button>
+                    <button class="tutor-cta sat disabled">Coming Soon</button>
                 </div>
 
                 <!-- IB -->
-                <div class="tutor-card ib" onclick="startSession('ib')">
+                <div class="tutor-card ib disabled">
                     <div>
                         <img src="tutor-ib.png" alt="Dr. Chen" class="tutor-avatar">
                         <div class="tutor-name">Dr. Chen</div>
                         <div class="tutor-title">IB Curriculum Expert</div>
                     </div>
-                    <button class="tutor-cta ib">Start</button>
+                    <button class="tutor-cta ib disabled">Coming Soon</button>
                 </div>
             </div>
         </div>
+
+        <!-- NEW: Pricing Section -->
+        <div class="pricing-section" id="pricing-section">
+            <div class="pricing-container">
+                <div style="text-align: center; margin-bottom: 48px;">
+                    <h2 style="font-size: 2.75rem; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 16px; color: var(--text-charcoal);">Choose your plan</h2>
+                    <p style="opacity: 0.5; font-size: 1.15rem; max-width: 600px; margin: 0 auto;">Get instant access to world-class AI tutors with flexible subscription options.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Basic -->
+                    <div class="pricing-card">
+                        <div>
+                            <div class="package-name">Basic</div>
+                            <p class="package-desc">Perfect for a quick question or a short study session.</p>
+                            
+                            <ul class="benefit-list">
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 20 free mins included</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> $0.60/ additional minute</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> All AI tutors access</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="price-tag">$10<span> / month</span></div>
+                            <button class="buy-btn" onclick="handleCheckout('basic')">Subscribe</button>
+                        </div>
+                    </div>
+
+                    <!-- Standard -->
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">Best Value</div>
+                        <div>
+                            <div class="package-name">Standard</div>
+                            <p class="package-desc">Our most popular choice for deep learning and exam prep.</p>
+                            
+                            <ul class="benefit-list">
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 60 free mins included</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> $0.50/ additional minute</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Priority tutor connection</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="price-tag">$25<span> / month</span></div>
+                            <button class="buy-btn primary" onclick="handleCheckout('standard')">Subscribe</button>
+                        </div>
+                    </div>
+
+                    <!-- Pro -->
+                    <div class="pricing-card">
+                        <div>
+                            <div class="package-name">Pro</div>
+                            <p class="package-desc">Unlimited potential for students who want the best.</p>
+                            
+                            <ul class="benefit-list">
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 90 free mins included</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> Then $0.40/min flat rate</li>
+                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 24/7 VIP Support</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="price-tag">$45<span> / month</span></div>
+                            <button class="buy-btn" onclick="handleCheckout('pro')">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Footer -->
+                <div class="trust-footer">
+                    <div class="trust-text">
+                        <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        Secure 256-bit SSL Encrypted Payment
+                    </div>
+                    <div class="trust-icons">
+                        <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.1em; opacity: 0.5;">POWERED BY STRIPE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Overlay -->
+    <div class="session-overlay" id="session-overlay">
+        <button class="session-close" onclick="closeSession()">&times;</button>
+        <div id="session-container" style="width: 100%; height: 100%;"></div>
     </div>
 
     <footer class="dark-footer" style="position:relative; z-index:1;">
@@ -278,23 +450,68 @@
             resize(); animate();
         })();
 
-        function startSession(tutorId) {
+        async function startSession(tutorId) {
+            if (tutorId === 'sat' || tutorId === 'ib') {
+                return; // Disabled
+            }
+
             const currentMinutes = parseFloat(localStorage.getItem('sama_minutes') || '5');
             if (currentMinutes <= 0) {
-                alert("You've run out of minutes! Please refill to continue.");
-                openPricingModal();
+                // Scroll to pricing section instead of alert
+                const pricingSection = document.getElementById('pricing-section');
+                if (pricingSection) {
+                    pricingSection.scrollIntoView({ behavior: 'smooth' });
+                    // Highlight the section briefly
+                    pricingSection.style.background = 'rgba(66, 133, 244, 0.1)';
+                    setTimeout(() => pricingSection.style.background = 'rgba(66, 133, 244, 0.03)', 1000);
+                }
                 return;
             }
-            window.location.href = 'signup.html';
+            
+            // Admissions (Eleanor) integration
+            if (tutorId === 'admissions') {
+                const overlay = document.getElementById('session-overlay');
+                const container = document.getElementById('session-container');
+                const startBtn = event.target;
+                const originalText = startBtn.textContent;
+
+                startBtn.textContent = 'Connecting...';
+                startBtn.disabled = true;
+
+                try {
+                    const response = await fetch('/api/start-tutor-session', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            tutorId: 'admissions',
+                            userName: localStorage.getItem('sama_user_name') || 'Student'
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (data.error) throw new Error(data.error);
+
+                    // Show Overlay
+                    overlay.classList.add('active');
+                    container.innerHTML = `<iframe src="${data.conversation_url}" allow="camera; microphone; autoplay; display-capture; fullscreen"></iframe>`;
+                    
+                    // Start minute countdown (simulated for now)
+                    console.log("Session started. ID:", data.conversation_id);
+                } catch (err) {
+                    console.error(err);
+                    alert("Failed to start session: " + err.message);
+                } finally {
+                    startBtn.textContent = originalText;
+                    startBtn.disabled = false;
+                }
+            }
         }
 
-        // Pricing Modal Logic
-        function openPricingModal() {
-            document.getElementById('pricing-modal-overlay').classList.add('active');
-        }
-
-        function closePricingModal() {
-            document.getElementById('pricing-modal-overlay').classList.remove('active');
+        function closeSession() {
+            const overlay = document.getElementById('session-overlay');
+            const container = document.getElementById('session-container');
+            overlay.classList.remove('active');
+            container.innerHTML = ''; // Kill the iframe
         }
 
         // Initialize Balance
@@ -344,55 +561,7 @@
         }
     </script>
 
-    <!-- Pricing Modal -->
-    <div class="modal-overlay" id="pricing-modal-overlay" onclick="if(event.target === this) closePricingModal()">
-        <div class="pricing-modal">
-            <button class="modal-close" onclick="closePricingModal()">&times;</button>
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 2.25rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 12px;">Choose your plan</h2>
-                <p style="opacity: 0.6; font-size: 1.1rem;">Get instant access to world-class AI tutors.</p>
-            </div>
-            
-            <div class="pricing-grid">
-                <!-- Basic -->
-                <div class="pricing-card">
-                    <div>
-                        <div class="package-name">Basic</div>
-                        <p class="package-desc">Perfect for a quick question or a short study session.</p>
-                    </div>
-                    <div>
-                        <div class="price-tag">$10<span> / 20 min</span></div>
-                        <button class="buy-btn" onclick="handleCheckout('basic')">Buy Minutes</button>
-                    </div>
-                </div>
-
-                <!-- Standard -->
-                <div class="pricing-card featured">
-                    <div class="featured-badge">Most Popular</div>
-                    <div>
-                        <div class="package-name">Standard</div>
-                        <p class="package-desc">Our most popular choice for deep learning and exam prep.</p>
-                    </div>
-                    <div>
-                        <div class="price-tag">$25<span> / 60 min</span></div>
-                        <button class="buy-btn primary" onclick="handleCheckout('standard')">Buy Minutes</button>
-                    </div>
-                </div>
-
-                <!-- Pro -->
-                <div class="pricing-card">
-                    <div>
-                        <div class="package-name">Pro</div>
-                        <p class="package-desc">Unlimited potential. Includes 60 free mins, then $0.40/min.</p>
-                    </div>
-                    <div>
-                        <div class="price-tag">$45<span> / pass</span></div>
-                        <button class="buy-btn" onclick="handleCheckout('pro')">Get Pro Access</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Old Pricing Modal (Removed - Now Native) -->
 </body>
 
 </html>

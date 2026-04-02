@@ -37,11 +37,12 @@ module.exports = async (req, res) => {
               name: description,
             },
             unit_amount: amount,
+            recurring: { interval: 'month' },
           },
           quantity: 1,
         },
       ],
-      mode: 'payment',
+      mode: 'subscription',
       success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}&package=${packageName}`,
       cancel_url: `${req.headers.origin}/cancel.html`,
     });
