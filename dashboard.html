@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         .dashboard-wrapper {
             min-height: 100vh;
@@ -173,8 +174,9 @@
 
     <header class="sticky-header">
         <a href="/" class="logo" style="text-decoration:none; color:inherit;">sama</a>
-        <div style="display:flex; align-items:center; gap:16px;">
-            <div class="balance-pill">⏱ 5 min free</div>
+        <div style="display:flex; align-items:center; gap:12px;">
+            <div class="balance-pill" id="user-balance">⏱ Loading...</div>
+            <button class="cta-button small secondary" onclick="openPricingModal()" style="padding: 10px 18px; background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); color: var(--text-charcoal); margin-left: 0;">Refill</button>
             <a href="contact.html" class="cta-button small">Contact Us</a>
         </div>
     </header>
@@ -277,9 +279,112 @@
         })();
 
         function startSession(tutorId) {
+            const currentMinutes = parseFloat(localStorage.getItem('sama_minutes') || '5');
+            if (currentMinutes <= 0) {
+                alert("You've run out of minutes! Please refill to continue.");
+                openPricingModal();
+                return;
+            }
             window.location.href = 'signup.html';
         }
+
+        // Pricing Modal Logic
+        function openPricingModal() {
+            document.getElementById('pricing-modal-overlay').classList.add('active');
+        }
+
+        function closePricingModal() {
+            document.getElementById('pricing-modal-overlay').classList.remove('active');
+        }
+
+        // Initialize Balance
+        function updateBalanceUI() {
+            const balance = localStorage.getItem('sama_minutes') || '5';
+            document.getElementById('user-balance').textContent = `⏱ ${balance} min`;
+        }
+
+        updateBalanceUI();
+
+        // Stripe Checkout Logic
+        const stripe = Stripe('pk_live_51TH5uGPRNb829msRWJczZn28CIhZRuVLz6oqaTWCDypl6yb90oRB6hIMhbffhNEfKgv3A8uZwxs5snPkN0UpfCX500KGfQlupx');
+
+        async function handleCheckout(packageName) {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Loading...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ packageName })
+                });
+
+                const session = await response.json();
+                if (session.error) throw new Error(session.error);
+
+                const result = await stripe.redirectToCheckout({ sessionId: session.id });
+                if (result.error) alert(result.error.message);
+            } catch (err) {
+                console.error(err);
+                alert('Failed to start checkout. Please try again.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
     </script>
+
+    <!-- Pricing Modal -->
+    <div class="modal-overlay" id="pricing-modal-overlay" onclick="if(event.target === this) closePricingModal()">
+        <div class="pricing-modal">
+            <button class="modal-close" onclick="closePricingModal()">&times;</button>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.25rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 12px;">Choose your plan</h2>
+                <p style="opacity: 0.6; font-size: 1.1rem;">Get instant access to world-class AI tutors.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="pricing-card">
+                    <div>
+                        <div class="package-name">Basic</div>
+                        <p class="package-desc">Perfect for a quick question or a short study session.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$10<span> / 20 min</span></div>
+                        <button class="buy-btn" onclick="handleCheckout('basic')">Buy Minutes</button>
+                    </div>
+                </div>
+
+                <!-- Standard -->
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <div>
+                        <div class="package-name">Standard</div>
+                        <p class="package-desc">Our most popular choice for deep learning and exam prep.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$25<span> / 60 min</span></div>
+                        <button class="buy-btn primary" onclick="handleCheckout('standard')">Buy Minutes</button>
+                    </div>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card">
+                    <div>
+                        <div class="package-name">Pro</div>
+                        <p class="package-desc">Unlimited potential. Includes 60 free mins, then $0.40/min.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$45<span> / pass</span></div>
+                        <button class="buy-btn" onclick="handleCheckout('pro')">Get Pro Access</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful – Sama</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .success-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 32px;
+            padding: 64px 48px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+        }
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+        }
+        p {
+            font-size: 1.1rem;
+            opacity: 0.6;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="success-page">
+        <div class="success-card">
+            <span class="success-icon">✨</span>
+            <h1>Payment Successful!</h1>
+            <p id="success-desc">Thank you for your purchase. Your minutes have been added to your account.</p>
+            <a href="dashboard.html" class="cta-button">Back to Dashboard</a>
+        </div>
+    </div>
+    <script>
+        // Update local storage balance based on the package
+        const urlParams = new URLSearchParams(window.location.search);
+        const packageName = urlParams.get('package');
+        
+        if (packageName) {
+            let currentMinutes = parseFloat(localStorage.getItem('sama_minutes') || '5');
+            let addedMinutes = 0;
+            
+            if (packageName === 'basic') addedMinutes = 20;
+            else if (packageName === 'standard') addedMinutes = 60;
+            else if (packageName === 'pro') addedMinutes = 60; // Initial 60 mins free
+            
+            localStorage.setItem('sama_minutes', (currentMinutes + addedMinutes).toString());
+            const desc = document.getElementById('success-desc');
+            desc.textContent = `Success! ${addedMinutes} minutes have been added to your account. Redirecting you back shortly...`;
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

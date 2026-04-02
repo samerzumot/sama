@@ -23,9 +23,14 @@ You can deploy this website to Vercel using one of the following methods.
 
 5.  Once completed, it will give you a **Production** URL.
 
-## Option 2: Vercel Dashboard (Git)
+## Stripe Environment Variables
 
-1.  Push your code to a Git repository.
-2.  In Vercel, create a **New Project**.
-3.  Import your repo.
-4.  **Important**: Ensure `Framework Preset` is set to **Other**.
+Before your payments will work on the production site, you **must** add your Stripe Secret Key to Vercel:
+
+1. Go to your **Vercel Dashboard**.
+2. Select your project (**sama-web**).
+3. Go to **Settings > Environment Variables**.
+4. Add a new variable:
+   - **Key**: `STRIPE_SECRET_KEY`
+   - **Value**: `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`
+5. Click **Save** and redeploy the project for the settings to take effect.
