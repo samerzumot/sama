@@ -15,13 +15,13 @@ module.exports = async (req, res) => {
 
   if (packageName === 'basic') {
     amount = 1000; // $10.00
-    description = '20 Minutes of AI Tutoring';
+    description = 'Sama Basic (20 mins included, then $0.60/min)';
   } else if (packageName === 'standard') {
     amount = 2500; // $25.00
-    description = '60 Minutes of AI Tutoring';
+    description = 'Sama Standard (60 mins included, then $0.50/min)';
   } else if (packageName === 'pro') {
     amount = 4500; // $45.00
-    description = 'Pro Tier (60 minutes included, $0.40/min after)';
+    description = 'Sama Pro (90 mins included, then $0.40/min)';
   } else {
     return res.status(400).json({ error: 'Invalid package' });
   }

@@ -64,7 +64,7 @@
             
             if (packageName === 'basic') addedMinutes = 20;
             else if (packageName === 'standard') addedMinutes = 60;
-            else if (packageName === 'pro') addedMinutes = 60; // Initial 60 mins free
+            else if (packageName === 'pro') addedMinutes = 90; // Updated to 90 mins
             
             localStorage.setItem('sama_minutes', (currentMinutes + addedMinutes).toString());
             const desc = document.getElementById('success-desc');
