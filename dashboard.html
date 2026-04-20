@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
+
     <style>
         .dashboard-wrapper {
             min-height: 100vh;
@@ -243,18 +243,7 @@
             background: rgba(255, 255, 255, 0.4);
         }
 
-        /* Native Pricing Section */
-        .pricing-section {
-            padding: 100px 24px;
-            background: rgba(66, 133, 244, 0.03);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            margin-top: 80px;
-        }
 
-        .pricing-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
     </style>
 </head>
 
@@ -264,7 +253,7 @@
     <header class="sticky-header">
         <a href="/" class="logo" style="text-decoration:none; color:inherit;">sama</a>
         <div style="display:flex; align-items:center; gap:12px;">
-            <div class="balance-pill" id="user-balance">⏱ Loading...</div>
+
             <a href="contact.html" class="cta-button small">Contact Us</a>
         </div>
     </header>
@@ -309,81 +298,7 @@
             </div>
         </div>
 
-        <!-- NEW: Pricing Section -->
-        <div class="pricing-section" id="pricing-section">
-            <div class="pricing-container">
-                <div style="text-align: center; margin-bottom: 48px;">
-                    <h2 style="font-size: 2.75rem; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 16px; color: var(--text-charcoal);">Choose your plan</h2>
-                    <p style="opacity: 0.5; font-size: 1.15rem; max-width: 600px; margin: 0 auto;">Get instant access to world-class AI tutors with flexible subscription options.</p>
-                </div>
 
-                <div class="pricing-grid">
-                    <!-- Basic -->
-                    <div class="pricing-card">
-                        <div>
-                            <div class="package-name">Basic</div>
-                            <p class="package-desc">Perfect for a quick question or a short study session.</p>
-                            
-                            <ul class="benefit-list">
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 20 free mins included</li>
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> $0.60/minute</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="price-tag">$10<span> / month</span></div>
-                            <button class="buy-btn" onclick="handleCheckout('basic')">Subscribe</button>
-                        </div>
-                    </div>
-
-                    <!-- Standard -->
-                    <div class="pricing-card featured">
-                        <div class="featured-badge">Best Value</div>
-                        <div>
-                            <div class="package-name">Standard</div>
-                            <p class="package-desc">Our most popular choice for deep learning and exam prep.</p>
-                            
-                            <ul class="benefit-list">
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 60 free mins included</li>
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> $0.50/minute</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="price-tag">$25<span> / month</span></div>
-                            <button class="buy-btn primary" onclick="handleCheckout('standard')">Subscribe</button>
-                        </div>
-                    </div>
-
-                    <!-- Pro -->
-                    <div class="pricing-card">
-                        <div>
-                            <div class="package-name">Pro</div>
-                            <p class="package-desc">Unlimited potential for students who want the best.</p>
-                            
-                            <ul class="benefit-list">
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> 90 free mins included</li>
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> $0.40/minute</li>
-                                <li class="benefit-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg> All AI tutors access</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="price-tag">$45<span> / month</span></div>
-                            <button class="buy-btn" onclick="handleCheckout('pro')">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trust Footer -->
-                <div class="trust-footer">
-                    <div class="trust-text">
-                        <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        Secure 256-bit SSL Encrypted Payment
-                    </div>
-                    <div class="trust-icons">
-                        <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.1em; opacity: 0.5;">POWERED BY STRIPE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Session Overlay -->
@@ -453,24 +368,14 @@
                 return; // Disabled
             }
 
-            const currentMinutes = parseFloat(localStorage.getItem('sama_minutes') || '5');
-            if (currentMinutes <= 0) {
-                // Scroll to pricing section instead of alert
-                const pricingSection = document.getElementById('pricing-section');
-                if (pricingSection) {
-                    pricingSection.scrollIntoView({ behavior: 'smooth' });
-                    // Highlight the section briefly
-                    pricingSection.style.background = 'rgba(66, 133, 244, 0.1)';
-                    setTimeout(() => pricingSection.style.background = 'rgba(66, 133, 244, 0.03)', 1000);
-                }
-                return;
-            }
+
             
             // Admissions (Eleanor) integration
             if (tutorId === 'admissions') {
+                const card = document.querySelector(`.tutor-card.${tutorId}`);
+                const startBtn = card.querySelector('.tutor-cta');
                 const overlay = document.getElementById('session-overlay');
                 const container = document.getElementById('session-container');
-                const startBtn = event.target;
                 const originalText = startBtn.textContent;
 
                 startBtn.textContent = 'Connecting...';
@@ -495,6 +400,15 @@
                     
                     // Start minute countdown (simulated for now)
                     console.log("Session started. ID:", data.conversation_id);
+
+                    // Automatic trial cutoff after 150 seconds (2.5m)
+                    window.trialTimeout = setTimeout(() => {
+                        closeSession();
+                        if (confirm("Your trial session has ended. Would you like to sign up for unlimited access?")) {
+                            window.location.href = 'signup.html';
+                        }
+                    }, 150000); // 150 seconds
+
                 } catch (err) {
                     console.error(err);
                     alert("Failed to start session: " + err.message);
@@ -510,53 +424,15 @@
             const container = document.getElementById('session-container');
             overlay.classList.remove('active');
             container.innerHTML = ''; // Kill the iframe
-        }
-
-        // Initialize Balance
-        function updateBalanceUI() {
-            const balance = localStorage.getItem('sama_minutes') || '5';
-            document.getElementById('user-balance').textContent = `⏱ ${balance} min`;
             
-            // Check for signup success
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('signup') === 'success') {
-                const name = localStorage.getItem('sama_user_name') || 'there';
-                const title = document.querySelector('.dashboard-title h1');
-                if (title) title.innerHTML = `Welcome, ${name}! <br>Who do you want to learn with?`;
+            if (window.trialTimeout) {
+                clearTimeout(window.trialTimeout);
             }
         }
 
-        updateBalanceUI();
 
-        // Stripe Checkout Logic
-        const stripe = Stripe('pk_live_51TH5uGPRNb829msRWJczZn28CIhZRuVLz6oqaTWCDypl6yb90oRB6hIMhbffhNEfKgv3A8uZwxs5snPkN0UpfCX500KGfQlupx');
 
-        async function handleCheckout(packageName) {
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = 'Loading...';
-            btn.disabled = true;
 
-            try {
-                const response = await fetch('/api/create-checkout-session', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ packageName })
-                });
-
-                const session = await response.json();
-                if (session.error) throw new Error(session.error);
-
-                const result = await stripe.redirectToCheckout({ sessionId: session.id });
-                if (result.error) alert(result.error.message);
-            } catch (err) {
-                console.error(err);
-                alert('Failed to start checkout. Please try again.');
-            } finally {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        }
     </script>
 
     <!-- Old Pricing Modal (Removed - Now Native) -->

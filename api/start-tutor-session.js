@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
         callback_url: `${req.headers.origin}/api/tavus-callback`,
         conversation_name: `Session with ${userName || 'Student'}`,
         properties: {
-          max_call_duration: 3600,
+          max_call_duration: 150,
           participant_left_timeout: 60
         }
       })
