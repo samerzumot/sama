@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+// node-fetch removed to use native fetch available in Node 18+
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
