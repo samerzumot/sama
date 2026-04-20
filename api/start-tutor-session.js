@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const response = await fetch('https://api.tavus.io/v2/conversations', {
+    const response = await fetch('https://tavusapi.com/v2/conversations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
