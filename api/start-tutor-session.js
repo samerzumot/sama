@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   }
 
   const apiKey = process.env.TAVUS_API_KEY;
-  const personaId = process.env.TAVUS_PERSONA_ID || 'p7625141'; // Placeholder or env
+  const personaId = process.env.TAVUS_PERSONA_ID || 'pcb75935c995'; // Updated persona ID
 
   if (!apiKey) {
     return res.status(500).json({ error: 'Tavus API Key not configured' });
