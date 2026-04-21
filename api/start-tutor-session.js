@@ -7,12 +7,18 @@ module.exports = async (req, res) => {
 
   const { tutorId, userName } = req.body;
 
-  if (tutorId !== 'admissions') {
+  const personaMap = {
+    'admissions': process.env.TAVUS_PERSONA_ID || 'pcb75935c995',
+    'ceo': 'p9d12daf0443'
+  };
+
+  const personaId = personaMap[tutorId];
+
+  if (!personaId) {
     return res.status(400).json({ error: 'Tutor not available' });
   }
 
   const apiKey = process.env.TAVUS_API_KEY;
-  const personaId = process.env.TAVUS_PERSONA_ID || 'pcb75935c995'; // Updated persona ID
 
   if (!apiKey) {
     return res.status(500).json({ error: 'Tavus API Key not configured' });

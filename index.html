@@ -34,7 +34,7 @@
                     reimagined.
                 </p>
                 <div class="hero-actions">
-                    <a href="#demo" class="cta-button primary">Meet Sama</a>
+                    <a href="#demo" class="cta-button primary">Meet our CEO</a>
                     <a href="dashboard.html" class="cta-button secondary">Try Now</a>
                 </div>
             </div>
@@ -44,13 +44,13 @@
         <div class="scroll-spacer"></div>
 
         <section id="demo" class="video-demo-section dark-section">
-            <h2 class="section-title fade-in" style="margin-bottom: 40px; font-size: 2rem;">This is Sama</h2>
-            <div class="video-container fade-in" style="display: flex; justify-content: center;">
-                <video controls autoplay playsinline
-                    style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-                    <source src="Sama-web2.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <h2 class="section-title fade-in" style="margin-bottom: 40px; font-size: 2rem;">Meet our CEO</h2>
+            <div class="video-container fade-in" id="ceo-video-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 450px; background: #000; border-radius: 24px; position: relative; overflow: hidden;">
+                <div class="video-overlay" id="ceo-overlay" style="text-align: center; z-index: 10;">
+                    <button class="cta-button primary" onclick="startCeoSession()" id="ceo-connect-btn">Connect with CEO</button>
+                    <p class="overlay-sub" style="margin-top: 16px; opacity: 0.7; color: #fff;">Start a live video conversation</p>
+                </div>
+                <div id="ceo-iframe-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none;"></div>
             </div>
         </section>
 

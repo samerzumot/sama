@@ -166,11 +166,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ----------------------------------------------------
-       TAVUS VIDEO INTERACTION (Removed)
+       TAVUS CEO INTERACTION
     ---------------------------------------------------- */
-    // The previous interactive demo has been replaced by a static video file (demo.mp4).
-
+    // The previous interactive demo has been replaced by a live Tavus interaction.
 });
+
+async function startCeoSession() {
+    const btn = document.getElementById('ceo-connect-btn');
+    const overlay = document.getElementById('ceo-overlay');
+    const iframeContainer = document.getElementById('ceo-iframe-container');
+    const originalText = btn.textContent;
+
+    btn.textContent = 'Connecting...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('/api/start-tutor-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tutorId: 'ceo' })
+        });
+
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+
+        overlay.style.display = 'none';
+        iframeContainer.style.display = 'block';
+        iframeContainer.innerHTML = `<iframe src="${data.conversation_url}" allow="camera; microphone; autoplay; display-capture; fullscreen" style="width:100%; height:100%; border:none;"></iframe>`;
+
+        // Optional: End trial after 2.5 minutes
+        setTimeout(() => {
+            iframeContainer.innerHTML = '<div style="color:white; text-align:center; padding-top:200px;">Trial session ended. <br><a href="signup.html" style="color:#4285F4;">Sign up</a> for full access.</div>';
+        }, 150000);
+
+    } catch (err) {
+        console.error(err);
+        alert("Failed to connect: " + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }
+}
 
 /* ----------------------------------------------------
    VIDEO SOUND TOGGLE
