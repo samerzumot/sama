@@ -1,0 +1,92 @@
+{
+  "conversation_id": "c255de0ccd8424a9",
+  "status": "ended",
+  "student_turns": 7,
+  "total_words": 68,
+  "raw_signals": {
+    "hedging_ratio": 0.0,
+    "emotional_vocabulary": {
+      "positive_words": [
+        "love",
+        "excited"
+      ],
+      "negative_words": [],
+      "vocabulary_richness": 2,
+      "valence_ratio": 2.0
+    },
+    "resilience_score": 1.0,
+    "cognitive_complexity": 0.0,
+    "self_disclosure_ratio": 0.132,
+    "emotional_coherence": {
+      "score": 0.8,
+      "face_signals": [
+        "uncertain",
+        "nervous",
+        "excited",
+        "confident"
+      ],
+      "verbal_positive": [
+        "love",
+        "excited"
+      ],
+      "verbal_negative": [],
+      "interpretation": "High coherence \u2014 stated emotions match observed facial signals. Strong self-awareness signal."
+    }
+  },
+  "eq_dimensions": {
+    "self_awareness": {
+      "score": 0.8,
+      "inputs": [
+        "emotional_coherence",
+        "self_disclosure_ratio"
+      ],
+      "note": "Based on coherence between stated and observed affect, and first-person introspective language."
+    },
+    "emotional_regulation": {
+      "score": 1.0,
+      "inputs": [
+        "resilience_score",
+        "hedging_ratio"
+      ],
+      "note": "Based on recovery language following negative emotional content."
+    },
+    "motivation": {
+      "score": 0.0,
+      "inputs": [
+        "cognitive_complexity",
+        "emotional_vocabulary"
+      ],
+      "note": "Based on causal reasoning density and goal-oriented language."
+    },
+    "self_disclosure": {
+      "score": 0.66,
+      "inputs": [
+        "self_disclosure_ratio"
+      ],
+      "note": "Proxy for openness and emotional expression (first-person language density)."
+    },
+    "valence_awareness": {
+      "score": 0.6666666666666666,
+      "inputs": [
+        "emotional_vocabulary"
+      ],
+      "note": "Ratio of positive to negative emotion words \u2014 awareness of own emotional state."
+    }
+  },
+  "perception": {
+    "available": true,
+    "observed_emotions": [
+      "nervous",
+      "excited",
+      "confident",
+      "uncertain"
+    ],
+    "behavioral_signals": {
+      "eye_contact_mentioned": true,
+      "smiling_mentioned": true,
+      "tension_mentioned": false,
+      "fidgeting_mentioned": true
+    },
+    "raw": "Here's a summary of the observations from the video call:\n\n*   **User Appearance and Setting:** The user is consistently observed as a light-skinned male, appearing to be in his late teens or early twenties, with dark, wavy or curly hair and facial hair (mustache/beard/stubble). He is wearing a white t-shirt and is seated on a dark gray couch against a plain, light-colored wall, typically seen from the chest up.\n*   **Key Behaviors:** Throughout the call, the user frequently rests a hand (either..."
+  }
+}
