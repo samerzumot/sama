@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama — EQ Insights</title>
+    <meta name="description" content="Sama's Emotional Intelligence model measures self-awareness, regulation, motivation, disclosure, and valence through AI-powered video conversations.">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="eq-insights.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="sticky-header">
+        <a href="index.html" class="logo">sama</a>
+        <a href="contact.html" class="cta-button small">Contact Us</a>
+    </header>
+
+    <main>
+        <!-- Hero — light theme -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-headline">
+                    Emotional<br>
+                    <span class="highlight">Intelligence.</span>
+                </h1>
+                <p class="hero-sub">
+                    Real-time facial perception meets linguistic analysis —
+                    measuring EQ from a single conversation.
+                </p>
+                <div class="hero-actions">
+                    <a href="#coherence" class="cta-button primary">See the Data</a>
+                    <a href="index.html" class="cta-button secondary">Back to Home</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer for scroll transition -->
+        <div class="scroll-spacer"></div>
+
+        <!-- Coherence Score — The Hero Number -->
+        <section class="dark-section eq-section" id="coherence">
+            <h2 class="section-title fade-in" style="margin-bottom: 16px;">Emotional Coherence</h2>
+            <p class="eq-subtitle fade-in">The gap between what a student says and what their face reveals.</p>
+
+            <div class="coherence-card fade-in">
+                <div class="coherence-ring-container">
+                    <svg class="coherence-ring" viewBox="0 0 200 200">
+                        <circle class="ring-bg" cx="100" cy="100" r="85" />
+                        <circle class="ring-progress" cx="100" cy="100" r="85"
+                            stroke-dasharray="534" stroke-dashoffset="534"
+                            data-target="0.8" />
+                    </svg>
+                    <div class="coherence-value">
+                        <span class="coherence-number" data-target="0.8">0.0</span>
+                        <span class="coherence-label">/ 1.0</span>
+                    </div>
+                </div>
+                <div class="coherence-info">
+                    <p class="coherence-meaning">High coherence — stated emotions match observed facial signals. Strong self-awareness.</p>
+                    <div class="coherence-detail">
+                        <div class="detail-row">
+                            <span class="detail-label">Stated</span>
+                            <div class="eq-tags">
+                                <span class="eq-tag stated">excited</span>
+                                <span class="eq-tag stated">love</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Observed</span>
+                            <div class="eq-tags">
+                                <span class="eq-tag observed">excited</span>
+                                <span class="eq-tag observed">confident</span>
+                                <span class="eq-tag observed-warn">nervous</span>
+                                <span class="eq-tag observed-warn">uncertain</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EQ Dimensions -->
+        <section class="dark-section eq-section" id="dimensions">
+            <h2 class="section-title fade-in" style="margin-bottom: 16px;">5 Dimensions of EQ</h2>
+            <p class="eq-subtitle fade-in">Mapped from a single 15-minute AI conversation.</p>
+
+            <div class="dimensions-layout">
+                <!-- Radar Chart -->
+                <div class="radar-card fade-in">
+                    <canvas id="radar-chart" width="400" height="400"></canvas>
+                </div>
+
+                <!-- Dimension Bars -->
+                <div class="dim-list fade-in">
+                    <div class="dim-item">
+                        <div class="dim-top">
+                            <span class="dim-name">Self Awareness</span>
+                            <span class="dim-score">0.80</span>
+                        </div>
+                        <div class="dim-bar"><div class="dim-fill" style="--w: 80%"></div></div>
+                        <span class="dim-note">Coherence between stated and observed affect</span>
+                    </div>
+
+                    <div class="dim-item">
+                        <div class="dim-top">
+                            <span class="dim-name">Emotional Regulation</span>
+                            <span class="dim-score">1.00</span>
+                        </div>
+                        <div class="dim-bar"><div class="dim-fill" style="--w: 100%"></div></div>
+                        <span class="dim-note">Recovery language following negative content</span>
+                    </div>
+
+                    <div class="dim-item">
+                        <div class="dim-top">
+                            <span class="dim-name">Motivation</span>
+                            <span class="dim-score">0.00</span>
+                        </div>
+                        <div class="dim-bar"><div class="dim-fill" style="--w: 0%"></div></div>
+                        <span class="dim-note">Causal reasoning density and goal-oriented language</span>
+                    </div>
+
+                    <div class="dim-item">
+                        <div class="dim-top">
+                            <span class="dim-name">Self Disclosure</span>
+                            <span class="dim-score">0.66</span>
+                        </div>
+                        <div class="dim-bar"><div class="dim-fill" style="--w: 66%"></div></div>
+                        <span class="dim-note">Openness and first-person language density</span>
+                    </div>
+
+                    <div class="dim-item">
+                        <div class="dim-top">
+                            <span class="dim-name">Valence Awareness</span>
+                            <span class="dim-score">0.67</span>
+                        </div>
+                        <div class="dim-bar"><div class="dim-fill" style="--w: 67%"></div></div>
+                        <span class="dim-note">Positive-to-negative emotion word ratio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Raw Signals -->
+        <section class="dark-section eq-section" id="signals">
+            <h2 class="section-title fade-in" style="margin-bottom: 16px;">Raw Signals</h2>
+            <p class="eq-subtitle fade-in">Linguistic markers — 68 words across 7 student turns.</p>
+
+            <div class="signals-grid fade-in">
+                <div class="signal-tile">
+                    <span class="signal-val">0.0</span>
+                    <span class="signal-label">Hedging Ratio</span>
+                    <span class="signal-sub">Self-doubt markers</span>
+                </div>
+                <div class="signal-tile">
+                    <span class="signal-val">0.0</span>
+                    <span class="signal-label">Cognitive Complexity</span>
+                    <span class="signal-sub">Causal reasoning</span>
+                </div>
+                <div class="signal-tile">
+                    <span class="signal-val">1.0</span>
+                    <span class="signal-label">Resilience</span>
+                    <span class="signal-sub">Recovery language</span>
+                </div>
+                <div class="signal-tile">
+                    <span class="signal-val">0.132</span>
+                    <span class="signal-label">Self-Disclosure</span>
+                    <span class="signal-sub">Introspective language</span>
+                </div>
+                <div class="signal-tile">
+                    <span class="signal-val">2</span>
+                    <span class="signal-label">Emotion Vocab</span>
+                    <span class="signal-sub">Unique emotion words</span>
+                </div>
+                <div class="signal-tile">
+                    <span class="signal-val">2.0</span>
+                    <span class="signal-label">Valence Ratio</span>
+                    <span class="signal-sub">Positive / negative</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perception -->
+        <section class="dark-section eq-section" id="perception">
+            <h2 class="section-title fade-in" style="margin-bottom: 16px;">Raven-0 Perception</h2>
+            <p class="eq-subtitle fade-in">Real-time facial and behavioral analysis from the session.</p>
+
+            <div class="perception-layout fade-in">
+                <div class="perception-signals-card">
+                    <div class="psig-row">
+                        <span class="psig-dot active"></span>
+                        <span class="psig-name">Eye Contact</span>
+                        <span class="psig-status">Detected</span>
+                    </div>
+                    <div class="psig-row">
+                        <span class="psig-dot active"></span>
+                        <span class="psig-name">Smiling</span>
+                        <span class="psig-status">Detected</span>
+                    </div>
+                    <div class="psig-row">
+                        <span class="psig-dot"></span>
+                        <span class="psig-name">Tension</span>
+                        <span class="psig-status faded">Not detected</span>
+                    </div>
+                    <div class="psig-row">
+                        <span class="psig-dot active"></span>
+                        <span class="psig-name">Fidgeting</span>
+                        <span class="psig-status">Detected</span>
+                    </div>
+
+                    <div class="observed-row">
+                        <span class="obs-label">Observed States</span>
+                        <div class="eq-tags">
+                            <span class="eq-tag observed">excited</span>
+                            <span class="eq-tag observed">confident</span>
+                            <span class="eq-tag observed-warn">nervous</span>
+                            <span class="eq-tag observed-warn">uncertain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perception-quote-card">
+                    <p>"The user frequently rests a hand on his head, suggesting thoughtfulness.
+                       His gaze varies, often looking downwards as if deep in thought.
+                       His emotional state exhibits a dynamic progression — initially reflective,
+                       then transitioning to genuine amusement, joy, and engagement."</p>
+                    <span class="quote-attr">— Raven-0 Perception Engine</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pitch -->
+        <section class="dark-section eq-section" id="pitch">
+            <div class="pitch-block fade-in">
+                <span class="pitch-num">0.8</span>
+                <h2>The gap surveys can't detect.</h2>
+                <p>This student said they were excited about college. Raven-0 observed
+                   nervousness and uncertainty on their face. Our coherence score
+                   quantifies that alignment — no survey or text-based tool can capture this.</p>
+                <p class="pitch-accent">Built from a single 15-minute conversation.</p>
+            </div>
+        </section>
+
+        <!-- Session Meta -->
+        <section class="dark-section eq-section">
+            <div class="meta-row fade-in">
+                <div class="meta-box">
+                    <span class="meta-val">c255de…4a9</span>
+                    <span class="meta-lbl">Session</span>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-val">7</span>
+                    <span class="meta-lbl">Turns</span>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-val">68</span>
+                    <span class="meta-lbl">Words</span>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-val">5+</span>
+                    <span class="meta-lbl">For Longitudinal</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="dark-footer">
+        <p>&copy; 2026 Sama AI Technology</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="eq-insights.js"></script>
+</body>
+
+</html>

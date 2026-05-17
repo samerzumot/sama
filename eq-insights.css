@@ -1,0 +1,503 @@
+/* =========================================
+   EQ INSIGHTS — EXTENDS style.css
+   Matches Sama site: light→dark, Inter/MuseoModerno,
+   blue #4285F4, purple #A142F4, glass cards
+   ========================================= */
+
+/* ── EQ Section spacing ───────────────────── */
+.eq-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.eq-subtitle {
+    text-align: center;
+    opacity: 0.6;
+    font-size: 1rem;
+    margin-bottom: 48px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Coherence Card ───────────────────────── */
+.coherence-card {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 860px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 48px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.coherence-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-4px);
+}
+
+.coherence-ring-container {
+    position: relative;
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.coherence-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 8;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: var(--accent-blue);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.coherence-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.coherence-number {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--text-white);
+}
+
+.coherence-label {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.4;
+}
+
+.coherence-info {
+    flex: 1;
+}
+
+.coherence-meaning {
+    font-size: 1rem;
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.coherence-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    opacity: 0.4;
+    min-width: 70px;
+}
+
+/* Tags — using site colors */
+.eq-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.eq-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.eq-tag.stated {
+    background: rgba(66, 133, 244, 0.12);
+    color: var(--accent-blue);
+    border: 1px solid rgba(66, 133, 244, 0.2);
+}
+
+.eq-tag.observed {
+    background: rgba(161, 66, 244, 0.12);
+    color: var(--accent-purple);
+    border: 1px solid rgba(161, 66, 244, 0.2);
+}
+
+.eq-tag.observed-warn {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Dimensions Layout ────────────────────── */
+.dimensions-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.radar-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+}
+
+#radar-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.dim-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.dim-item {
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.dim-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateX(4px);
+}
+
+.dim-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dim-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.dim-score {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    font-variant-numeric: tabular-nums;
+}
+
+.dim-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.dim-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent-blue);
+    border-radius: 2px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dim-fill.animated {
+    width: var(--w);
+}
+
+.dim-note {
+    font-size: 0.75rem;
+    opacity: 0.35;
+}
+
+/* ── Signals Grid ─────────────────────────── */
+.signals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.signal-tile {
+    text-align: center;
+    padding: 28px 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.signal-tile:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.signal-val {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+}
+
+.signal-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.signal-sub {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.35;
+}
+
+/* ── Perception Layout ────────────────────── */
+.perception-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.perception-signals-card,
+.perception-quote-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 36px;
+}
+
+.psig-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.psig-row:last-of-type {
+    border-bottom: none;
+}
+
+.psig-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.psig-dot.active {
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px rgba(66, 133, 244, 0.4);
+}
+
+.psig-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+.psig-status {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.psig-status.faded {
+    opacity: 0.25;
+}
+
+.observed-row {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.obs-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.35;
+    margin-bottom: 10px;
+}
+
+.perception-quote-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.perception-quote-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.6;
+    font-style: italic;
+    margin-bottom: 16px;
+}
+
+.quote-attr {
+    font-size: 0.75rem;
+    opacity: 0.35;
+    font-weight: 500;
+}
+
+/* ── Pitch Block ──────────────────────────── */
+.pitch-block {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+}
+
+.pitch-num {
+    display: block;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    margin-bottom: 8px;
+}
+
+.pitch-block h2 {
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.pitch-block p {
+    font-size: 1rem;
+    opacity: 0.6;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.pitch-accent {
+    margin-top: 20px !important;
+    font-weight: 600;
+    color: var(--accent-blue) !important;
+    opacity: 1 !important;
+}
+
+/* ── Meta Row ─────────────────────────────── */
+.meta-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.meta-box {
+    text-align: center;
+    padding: 20px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+}
+
+.meta-val {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+}
+
+.meta-lbl {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Responsive ───────────────────────────── */
+@media (max-width: 900px) {
+    .coherence-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 36px 24px;
+        gap: 32px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .dimensions-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .radar-card {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .signals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .perception-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .signals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pitch-num {
+        font-size: 3.5rem;
+    }
+
+    .pitch-block {
+        padding: 40px 24px;
+    }
+}
