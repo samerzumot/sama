@@ -175,8 +175,6 @@
 </head>
 
 <body class="light-theme">
-    <canvas id="bg-canvas"></canvas>
-
     <header class="sticky-header">
         <div style="display:flex; align-items:center; gap:14px;">
             <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Open menu">
@@ -257,57 +255,6 @@
     </footer>
 
     <script>
-        /* ── Particle canvas ── */
-        (function () {
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            let width, height, particles = [];
-            let mouse = { x: -1000, y: -1000 };
-            window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                    this.size = Math.random() * 2 + 1;
-                    this.baseAlpha = Math.random() * 0.5 + 0.1;
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const angle = Math.atan2(dy, dx);
-                        const force = (150 - dist) / 150;
-                        this.vx -= Math.cos(angle) * force * 0.1;
-                        this.vy -= Math.sin(angle) * force * 0.1;
-                    }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(66, 133, 244, ${this.baseAlpha * 1.2})`;
-                    ctx.fill();
-                }
-            }
-            function resize() {
-                width = window.innerWidth; height = window.innerHeight;
-                canvas.width = width; canvas.height = height;
-                particles = [];
-                for (let i = 0; i < Math.floor((width * height) / 15000); i++) particles.push(new Particle());
-            }
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
-            }
-            window.addEventListener('resize', resize);
-            resize(); animate();
-        })();
-
         /* ── Sidebar ── */
         (function () {
             const toggle  = document.getElementById('sidebar-toggle');
